@@ -1,0 +1,36 @@
+#include "GL/glew.h"
+#define GLFW_DLL
+#include "GLFW/glfw3.h"
+#include <stdio.h>
+#include <iostream>
+#include <string>
+#include <vector>
+
+static GLuint counter = 0;
+
+class Vao{
+public:
+	unsigned int getIbo(GLuint*, size_t, GLuint);
+	
+	unsigned int getVbo(GLfloat*, size_t, GLuint);
+	
+	GLuint initializeVao(GLfloat* , GLuint* , size_t, size_t, GLuint);
+	
+	GLuint getId();
+	
+	void setId(GLuint);
+	
+	void BindVertexArray();
+
+private:
+	GLfloat _coordenates;
+
+  GLuint _index;
+
+  size_t _sizeCoordenates;
+
+  size_t _sizeIndex;
+  
+  GLuint _id;
+  
+};
