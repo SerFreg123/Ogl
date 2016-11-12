@@ -1,0 +1,10 @@
+#version 410
+layout(location = 0) in vec3 vp;
+uniform mat4 gTransformation;
+uniform mat4 gProjection;
+uniform mat4 gViewMatrix;
+out vec4 Color;
+void main() {
+	gl_Position = gProjection * gViewMatrix * gTransformation * vec4(vp, 1.0);
+	Color = vec4(clamp(vp, 0.0, 1.0), 1.0);
+}
