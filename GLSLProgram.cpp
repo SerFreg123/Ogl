@@ -143,8 +143,11 @@ void GLSLProgram::updateUniformVariables(GLFWwindow& window){
 	gTransformationLocation = glGetUniformLocation(_programID, "gTransformation");
   gProjectionLocation = glGetUniformLocation(_programID, "gProjection");
   gViewLocation = glGetUniformLocation(_programID, "gViewMatrix");
+  	
+	GLint textureLocation = glGetUniformLocation(_programID, "mySampler");
+	glUniform1i(textureLocation, 0);
 	
-  glm::mat4 modelView = setTransformationMatrix(glm::vec3(0,0,0), 0, 0, 0, 0.1f);
+  glm::mat4 modelView = setTransformationMatrix(glm::vec3(0,0,0), 0, 0, 0, 1.0f);
 	glm::mat4 viewMatrix = setViewMatrix(_camera);
 	glm::mat4 projectionMatrix = setProjectionMatrix(90, 512.0f, 512.0f);
 

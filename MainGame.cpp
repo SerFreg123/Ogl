@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include "Error.h"
+#include "ImageLoader.h"
 
 MainGame::MainGame()
 {
@@ -12,18 +13,20 @@ MainGame::MainGame()
 }
 
 void MainGame::run(){
-	initSystem();
+	initSystem(720, 720);
 
 	// PONER COORDENADAS DE DIBUJO
 	_sprite.init();
-
+	_playerTexture = ImageLoader::loadPNG("Textures/PNG/wizard_fire/attack_1.png");
 	gameLoop();
 }
 
-void MainGame::initSystem(){
+void MainGame::initSystem(GLuint width, GLuint height){
+	
+	
   if(!glfwInit()) fatalError("GLFW could not be initialized!");
 	
-	_window = glfwCreateWindow(512,512,"Hello Triangles", NULL, NULL);
+	_window = glfwCreateWindow(width,height,"Hello Triangles", NULL, NULL);
 	
   if(!_window) fatalError("GLFW window could not be created!");
     
@@ -48,7 +51,8 @@ void MainGame::initSystem(){
 
 void MainGame::initShaders(){
 	_colorProgram.compileShaders("Shaders/colorShading.vert.txt", "Shaders/colorShading.frag.txt");
-	//_colorProgram.addAtribute("vertexPosition");
+	_colorProgram.addAtribute("vertexPosition");
+	_colorProgram.addAtribute("vertexColor");
 	_colorProgram.linkShaders();
 	_colorProgram.use();
 }
@@ -70,9 +74,13 @@ void MainGame::drawGame(){
 	glClearDepth(1.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	
 	//_colorProgram.use();
+	
+	//glActiveTexture(GL_TEXTURE0);
+	//glBindTexture(GL_TEXTURE_2D, _playerTexture.id);	
 	_sprite.draw();
 	//_colorProgram.unuse();
 
+	//glBindTexture(GL_TEXTURE_2D, 0);
 	glfwPollEvents();
   glfwSwapBuffers(_window);  
 }
