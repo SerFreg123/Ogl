@@ -17,6 +17,7 @@
 #include "GLSLProgram.h"
 #include "Sprite.h"
 #include "CTransformationMatrix.h"
+#include "Texture.h"
 
 enum class GameState {
 	PLAY,
@@ -33,7 +34,7 @@ public:
 
 private:
 
-	void initSystem();
+	void initSystem(GLuint, GLuint);
 	void initShaders();
 	void processInput();
 	void gameLoop();
@@ -44,7 +45,8 @@ private:
 	int _screenWidth;
 	int _screenHeight;
 	GameState _gameState;
-
+	GLTexture _playerTexture;
 	Sprite _sprite;
+	
 	GLSLProgram _colorProgram;
 };
