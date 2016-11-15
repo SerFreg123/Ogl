@@ -13,6 +13,9 @@
 #include <iostream>
 #include <string>
 #include "Camera.h"
+#include "Texture.h"
+#include "ImageLoader.h"
+#include "Vertex.h"
 
 class Sprite
 {
@@ -22,6 +25,9 @@ public:
 
 	void init();
 	void draw();
+	void setVbo(Vertex* , size_t);
+	void setIbo(GLuint* , size_t);
+	void setVao();
 
 private:
 	float _x;
@@ -31,5 +37,6 @@ private:
 	GLuint _vboID;
 	GLuint _iboID;
 	GLuint _vaoID;
+	GLTexture _playerTexture;
 };
 
